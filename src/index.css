@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+:root {
+  --primary-blue: #4a6fa5;
+  --primary-orange: #e07b39;
+  --text-white: #ffffff;
+  --text-dark: #2c2c2c;
+  --overlay-dark: rgba(0, 0, 0, 0.3);
+}

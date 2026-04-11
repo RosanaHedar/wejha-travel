@@ -1,0 +1,139 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo */
+.navbar-logo a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-we {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #4a6fa5;
+  letter-spacing: -1px;
+}
+
+.logo-sha {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #e07b39;
+  letter-spacing: -1px;
+}
+
+/* Combine WE and SHA on same line */
+.navbar-logo a {
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.logo-arabic {
+  display: block;
+  font-size: 0.65rem;
+  color: #888;
+  width: 100%;
+  text-align: left;
+  margin-top: -2px;
+}
+
+/* Nav Links */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 36px;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #2c2c2c;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #e07b39;
+}
+
+/* Icons */
+.navbar-icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2c2c2c;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.icon-btn:hover {
+  color: #e07b39;
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #2c2c2c;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 20px 40px;
+    gap: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-icons {
+    display: none;
+  }
+}

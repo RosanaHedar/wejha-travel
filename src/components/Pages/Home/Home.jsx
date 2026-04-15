@@ -9,6 +9,7 @@ import aswanimg6 from '../../assests/images/9-Best-Things-to-Do-in-Alexandria-Eg
 // Replace these with your actual images inside src/assets/images/
 // Example: import aswanImg from '../../assets/images/aswan.jpg';
 // For now we use placeholder colors + labels so the slider still works
+import Navbar from '../../Navbar/Navbar';
 
 const slides = [
   {
@@ -70,6 +71,7 @@ function Home() {
   return (
     <div className="home">
       {/* Hero Slider */}
+      <Navbar/>
       <section
         className="hero"
         style={{
@@ -110,6 +112,7 @@ function Home() {
       </section>
 
       {/* Add more sections below as you build the page */}
+     
     </div>
   );
 }

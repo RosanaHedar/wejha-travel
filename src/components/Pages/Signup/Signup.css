@@ -1,4 +1,4 @@
-.login-page {
+.signup-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.login-bg {
+.signup-bg {
   position: fixed;
   inset: 0;
   background-image: url('../../assests/images/Pyramids.jpg');
@@ -18,7 +18,7 @@
   z-index: 0;
 }
 
-.login-card {
+.signup-card {
   position: relative;
   z-index: 1;
   width: 100%;
@@ -31,40 +31,43 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-.login-logo {
+/* Logo */
+.signup-logo {
   text-align: center;
-  margin-bottom: 20px;
   font-size: 30px;
   font-weight: 800;
   letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+.signup-logo .we { color: #6fa3ef; }
+.signup-logo .z  { color: #ff8c42; }
+.signup-logo .ha { color: white; }
+.logo-ar {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
 }
 
-.login-logo .we  { color: #6fa3ef; }
-.login-logo .z   { color: #ff8c42; }
-.login-logo .ha  { color: white; }
-.logo-ar         { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
-
-.login-heading {
+/* Heading */
+.signup-heading {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 }
-
-.login-heading h2 {
+.signup-heading h2 {
   font-size: 24px;
   font-weight: 700;
   color: white;
   margin-bottom: 6px;
 }
-
-.login-heading p {
+.signup-heading p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* Fields */
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
-
 .field label {
   display: block;
   font-size: 13px;
@@ -72,7 +75,6 @@
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 7px;
 }
-
 .input-wrap {
   display: flex;
   align-items: center;
@@ -84,16 +86,13 @@
   height: 52px;
   transition: border-color 0.2s;
 }
-
 .input-wrap:focus-within {
   border-color: rgba(111, 163, 239, 0.7);
 }
-
 .input-wrap svg {
   flex-shrink: 0;
   color: rgba(255, 255, 255, 0.45);
 }
-
 .input-wrap input {
   background: none;
   border: none;
@@ -103,34 +102,21 @@
   flex: 1;
   width: 100%;
 }
-
 .input-wrap input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
-
 .eye-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
   color: rgba(255, 255, 255, 0.45);
   padding: 0;
   display: flex;
   align-items: center;
 }
 
-.forgot-row {
-  text-align: right;
-  margin-bottom: 22px;
-}
-
-.forgot-row a {
-  font-size: 13px;
-  color: rgba(111, 163, 239, 0.9);
-  text-decoration: none;
-}
-
-.btn-signin {
+/* Button */
+.btn-create {
   width: 100%;
   height: 52px;
   border-radius: 12px;
@@ -140,37 +126,36 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+  margin-top: 6px;
   transition: opacity 0.2s, transform 0.1s;
 }
+.btn-create:hover  { opacity: 0.92; }
+.btn-create:active { transform: scale(0.98); }
 
-.btn-signin:hover  { opacity: 0.92; }
-.btn-signin:active { transform: scale(0.98); }
-
+/* Divider */
 .divider {
   display: flex;
   align-items: center;
   gap: 12px;
   margin: 22px 0;
 }
-
 .divider hr {
   flex: 1;
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
-
 .divider span {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
 }
 
+/* Social */
 .social-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-
 .btn-social {
   height: 48px;
   border-radius: 12px;
@@ -186,25 +171,24 @@
   gap: 8px;
   transition: background 0.2s;
 }
-
 .btn-social:hover { background: rgba(255, 255, 255, 0.16); }
 
-.signup-row {
+/* Sign in link */
+.login-row {
   text-align: center;
   margin-top: 22px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.5);
 }
-
-.signup-row a {
+.login-row a {
   color: #6fa3ef;
   font-weight: 600;
   text-decoration: none;
 }
 
-/* ── Responsive ─────────────────────────── */
+/* Responsive */
 @media (max-width: 480px) {
-  .login-card {
+  .signup-card {
     padding: 28px 20px 24px;
   }
   .social-row {

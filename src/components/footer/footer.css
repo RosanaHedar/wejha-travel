@@ -1,8 +1,9 @@
 .footer {
-  background: linear-gradient(160deg, #1a3a6b 0%, #0f2550 100%);
-  color: #fff;
-  padding: 60px 80px 0;
+  background: #8A7650;
+  color: #DBCEA5;
+  padding: 3.5rem 2.5rem 1.5rem;
 }
+
 
 /* ── Top Grid ── */
 .footer-top {
@@ -27,7 +28,7 @@
 
 .footer-logo-arabic {
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
+  color: #DBCEA5;
   margin-top: 2px;
   margin-bottom: 14px;
 }
@@ -35,7 +36,7 @@
 .footer-desc {
   font-size: 0.875rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.65);
+  color: #DBCEA5;
   max-width: 280px;
 }
 
@@ -44,7 +45,7 @@
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #fff;
+  color: #ECE7D1;
   letter-spacing: 0.2px;
 }
 
@@ -58,13 +59,13 @@
 
 .footer-links a {
   text-decoration: none;
-  color: rgba(255,255,255,0.65);
+  color: #DBCEA5;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
 
 .footer-links a:hover {
-  color: #e07b39;
+  color: #ECE7D1;
 }
 
 /* ── Contact ── */
@@ -79,13 +80,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: rgba(255,255,255,0.65);
+  color: #DBCEA5;
   font-size: 0.9rem;
 }
 
 .footer-contact svg {
   flex-shrink: 0;
-  color: rgba(255,255,255,0.5);
+  color: #ECE7D1;
 }
 
 /* ── Social Icons ── */
@@ -115,7 +116,7 @@
 
 .footer-social-text {
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.55);
+  color: #DBCEA5;
   line-height: 1.5;
   max-width: 220px;
 }
@@ -123,8 +124,9 @@
 /* ── Divider ── */
 .footer-divider {
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.2);
 }
+
 
 /* ── Bottom Bar ── */
 .footer-bottom {
@@ -133,7 +135,7 @@
   justify-content: space-between;
   padding: 20px 0;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.5);
+  color: #DBCEA5;
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -145,13 +147,13 @@
 }
 
 .footer-legal a {
-  color: rgba(255,255,255,0.5);
+  color: #DBCEA5;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .footer-legal a:hover {
-  color: #fff;
+  color: #ECE7D1;
 }
 
 /* ────────────────────────────────

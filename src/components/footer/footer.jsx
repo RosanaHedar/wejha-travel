@@ -34,7 +34,9 @@ function Footer() {
 
         {/* Contact */}
         <div className="footer-col">
-          <h4 className="footer-heading">Contact Us</h4>
+          <h4 className="footer-heading">
+              <Link to="/contact" style={{ color: 'inherit', textDecoration: 'none' }}> Contact Us</Link>
+            </h4>
           <ul className="footer-contact">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"

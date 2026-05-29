@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'wegha_db.php';
+include '../wegha_db.php';
 
 // --- THE ADMIN SHIELD ---
 if (!isset($_SESSION['admin_id'])) {

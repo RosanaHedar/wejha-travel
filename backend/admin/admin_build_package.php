@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'wegha_db.php';
+include '../wegha_db.php';
 
 // --- ADMIN SHIELD ---
 if (!isset($_SESSION['admin_id'])) {
@@ -42,7 +42,7 @@ if (isset($_GET['edit_service'])) {
 }
 
 // ========================================================
-// GET LOGIC: HIDE, SHOW, AND permanent permanent DELETES
+// GET LOGIC: HIDE, SHOW, AND PERMANENT DELETES
 // ========================================================
 
 // Destination Actions
@@ -119,7 +119,7 @@ if (isset($_POST['save_destination'])) {
     // Process image file pointer shifts
     $image = $_FILES['destination_image']['name'];
     if (!empty($image)) {
-        $target = "assets/img/" . basename($image);
+        $target = "../assets/img/" . basename($image);
         move_uploaded_file($_FILES['destination_image']['tmp_name'], $target);
         $img_file = $image;
     } else {
@@ -127,14 +127,12 @@ if (isset($_POST['save_destination'])) {
     }
 
     if ($target_id > 0) {
-        // Run update query if in edit mode
         $sql = "UPDATE destinations SET destination_name = '$name', image_url = '$img_file' WHERE destination_id = $target_id";
         if ($conn->query($sql)) {
             header("Location: admin_build_package.php?msg=dest_updated");
             exit();
         }
     } else {
-        // Run insert query if in standard mode
         $sql = "INSERT INTO destinations (destination_name, image_url, is_active) VALUES ('$name', '$img_file', 1)";
         if ($conn->query($sql)) {
             header("Location: admin_build_package.php?msg=dest_shown");
@@ -153,14 +151,12 @@ if (isset($_POST['save_service'])) {
     $target_id = intval($_POST['edit_id'] ?? 0);
 
     if ($target_id > 0) {
-        // Execute update loop logic
         $sql = "UPDATE services SET destination_id = $dest_id, service_name = '$name', service_type = '$type', price = $price WHERE service_id = $target_id";
         if ($conn->query($sql)) {
             header("Location: admin_build_package.php?msg=service_updated");
             exit();
         }
     } else {
-        // Execute basic catalog matrix insert
         $sql = "INSERT INTO services (destination_id, service_name, service_type, price, is_active) VALUES ($dest_id, '$name', '$type', $price, 1)";
         if ($conn->query($sql)) {
             header("Location: admin_build_package.php?msg=service_shown");
@@ -181,77 +177,119 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Builder Configuration | Wegha Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* --- WEGHA ADMIN CENTRALIZED STYLE MATRIX --- */
+        :root {
+            --primary-blue: #1e5494;
+            --accent-orange: #f37021;
+            --bg-slate: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f7f6;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-slate);
+            color: var(--text-main);
             margin: 0;
             display: flex;
         }
 
-        /* --- COMPLETE SIDEBAR OVERRIDE BLOCK --- */
+        /* --- UNIFIED SIDEBAR NAVIGATION --- */
         .sidebar {
-            width: 250px !important;
-            background: #1e5494 !important;
-            color: white !important;
-            height: 100vh !important;
-            padding: 20px !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            box-sizing: border-box !important;
-            z-index: 9999 !important;
+            width: 260px;
+            background: var(--primary-blue);
+            color: white;
+            height: 100vh;
+            padding: 24px 16px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            z-index: 999;
         }
 
         .sidebar h2 {
-            text-align: center !important;
-            color: #f37021 !important;
-            margin-bottom: 30px !important;
-            margin-top: 10px !important;
+            text-align: center;
+            color: var(--accent-orange);
+            margin: 0 0 32px 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
 
         .sidebar a {
-            display: block !important;
-            color: white !important;
-            text-decoration: none !important;
-            padding: 12px !important;
-            margin-bottom: 5px !important;
-            border-radius: 5px !important;
-            font-size: 0.9rem !important;
-            transition: 0.2s ease !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 12px 16px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar a i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
         }
 
         .sidebar a:hover {
-            background: rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
-        .sidebar a[href="admin_add_builder_options.php"],
+        /* Highlight rule for the active configuration route page link */
         .sidebar a[href="admin_build_package.php"] {
-            background: rgba(255, 255, 255, 0.2) !important;
-            border-left: 4px solid #f37021 !important;
-            padding-left: 8px !important;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-left: 4px solid var(--accent-orange);
+            font-weight: 600;
+            padding-left: 12px;
         }
 
         .sidebar .logout {
-            margin-top: 30px !important;
-            color: #ff6b6b !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-            padding-top: 20px !important;
+            margin-top: auto;
+            color: #f87171;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 16px;
+        }
+
+        .sidebar .logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
         }
 
         /* --- MAIN CONTENT CONTAINER --- */
         .main-content {
-            margin-left: 270px;
+            margin-left: 260px;
             padding: 40px;
-            width: calc(100% - 270px);
+            width: calc(100% - 260px);
             box-sizing: border-box;
+            min-height: 100vh;
         }
 
         h1 {
-            color: #1e5494;
-            margin-bottom: 30px;
+            color: var(--primary-blue);
+            margin: 0 0 8px 0;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin: 0 0 35px 0;
+            font-size: 0.95rem;
         }
 
         .forms-grid {
@@ -264,80 +302,95 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
         .form-card {
             background: white;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-            border-top: 4px solid #1e5494;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+            border-top: 4px solid var(--primary-blue);
             transition: 0.3s ease;
         }
 
-        /* Edit Mode Highlights Form Background color */
         .form-card.edit-active {
-            border-top-color: #f37021;
-            box-shadow: 0 4px 20px rgba(243, 112, 33, 0.1);
+            border-top-color: var(--accent-orange);
+            box-shadow: 0 4px 20px rgba(243, 112, 33, 0.08);
         }
 
         .form-card h2 {
-            color: #f37021;
+            color: var(--primary-blue);
             margin-top: 0;
             font-size: 1.25rem;
             border-bottom: 2px solid #f4f7f6;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .form-card.edit-active h2 {
+            color: var(--accent-orange);
         }
 
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .input-group label {
             display: block;
             margin-bottom: 6px;
-            font-weight: 600;
-            color: #4a5568;
-            font-size: 0.9rem;
+            font-weight: 700;
+            color: #475569;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .input-group input,
         .input-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
             box-sizing: border-box;
             font-size: 0.95rem;
             outline: none;
+            background-color: #fbfcfd;
+            transition: all 0.2s ease;
         }
 
         .input-group input:focus,
         .input-group select:focus {
-            border-color: #1e5494;
+            border-color: var(--primary-blue);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(30, 84, 148, 0.1);
         }
 
         .btn-flex-container {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            margin-top: 24px;
             margin-bottom: 25px;
         }
 
         .btn-submit {
-            background: #1e5494;
+            background: var(--primary-blue);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
             flex-grow: 1;
-            font-size: 1rem;
-            transition: 0.2s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px -1px rgba(30, 84, 148, 0.1);
+            transition: all 0.2s;
         }
 
         .btn-submit:hover {
-            background: #163f72;
+            background: #153d6b;
+            transform: translateY(-1px);
         }
 
         .btn-submit.btn-save-edit {
-            background: #f37021;
+            background: var(--accent-orange);
+            box-shadow: 0 4px 6px -1px rgba(243, 112, 33, 0.1);
         }
 
         .btn-submit.btn-save-edit:hover {
@@ -346,67 +399,76 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
 
         .btn-cancel {
             background: #e2e8f0;
-            color: #4a5568;
+            color: #475569;
             text-decoration: none;
             padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.9rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
             text-align: center;
-            transition: 0.2s;
+            box-sizing: border-box;
+            transition: all 0.2s;
         }
 
         .btn-cancel:hover {
             background: #cbd5e1;
         }
 
-        /* --- GLIMPSE OVERVIEW LIST SCROLL INTERFACE --- */
+        /* --- TABLES MATRIX INTERFACES --- */
         .table-container {
-            max-height: 280px;
+            max-height: 320px;
             overflow-y: auto;
-            border: 1px solid #eee;
-            border-radius: 8px;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
             margin-top: 15px;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.01);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         th,
         td {
-            padding: 10px;
+            padding: 12px 14px;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: middle;
         }
 
         th {
-            background: #f8f9fa;
-            color: #1e5494;
+            background: #f8fafc;
+            color: var(--primary-blue);
             position: sticky;
             top: 0;
             z-index: 10;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #edf2f7;
         }
 
         .thumb-mini {
-            width: 35px;
-            height: 35px;
-            border-radius: 4px;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
             object-fit: cover;
+            border: 1px solid #edf2f7;
         }
 
         .action-link {
             text-decoration: none;
-            font-weight: bold;
-            margin-right: 8px;
+            font-weight: 700;
+            margin-right: 10px;
             font-size: 0.8rem;
         }
 
         .link-edit {
-            color: #1e5494;
+            color: var(--primary-blue);
         }
 
         .link-hide {
@@ -414,41 +476,44 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
         }
 
         .link-show {
-            color: #2ecc71;
+            color: #10b981;
         }
 
         .link-delete {
-            color: #e74c3c;
+            color: #ef4444;
         }
 
         .muted-row {
-            opacity: 0.5;
-            background: #fafafa;
+            opacity: 0.6;
+            background: #fdfdfd;
         }
 
         .hidden-badge {
-            background: #ffeeba;
-            color: #856404;
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: #fef3c7;
+            color: #d97706;
+            padding: 2px 8px;
+            border-radius: 50px;
             font-size: 0.7rem;
-            font-weight: bold;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-left: 5px;
         }
 
         .alert {
-            padding: 12px;
+            padding: 14px;
             background: #e6fffa;
-            color: #2c7a7b;
+            color: #047857;
             border: 1px solid #b2f5ea;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 20px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .alert-error {
             background: #fff5f5;
-            color: #c53030;
+            color: #b91c1c;
             border-color: #feb2b2;
         }
     </style>
@@ -456,17 +521,31 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
 
 <body>
 
-    <?php include 'admin_sidebar.php'; ?>
+    <div class="sidebar">
+        <h2>Wegha Admin</h2>
+        <a href="admin_analytics.php"><i class="fas fa-chart-pie"></i> Business Analytics</a>
+        <a href="admin_dashboard.php"><i class="fas fa-th-large"></i> Dashboard Overview</a>
+        <a href="admin_categories.php"><i class="fas fa-folder"></i> Manage Categories</a>
+        <a href="admin_add_package.php"><i class="fas fa-plus-circle"></i> Add New Package</a>
+        <a href="admin_build_package.php"><i class="fas fa-tools"></i> Setup Custom Options</a>
+        <a href="admin_manage_packages.php"><i class="fas fa-boxes"></i> Manage Packages</a>
+        <a href="admin_users.php"><i class="fas fa-users"></i> Registered Users</a>
+        <a href="admin_bookings.php"><i class="fas fa-plane"></i> Manage Bookings</a>
+        <a href="admin_support.php"><i class="fas fa-envelope"></i> Support Tickets</a>
+        <a href="admin_reviews.php"><i class="fas fa-comments"></i> Manage Reviews</a>
+        <a href="admin_logout.php" class="logout"><i class="fas fa-door-open"></i> Logout</a>
+    </div>
 
     <div class="main-content">
-        <h1><i class="fas fa-tools"></i> Custom Package Configuration</h1>
+        <h1>Custom Package Configuration</h1>
+        <p class="subtitle">Administer choices pool elements for travelers designing customized itineraries:</p>
 
         <div class="forms-grid">
 
             <div class="form-card <?php echo $edit_dest_mode ? 'edit-active' : ''; ?>">
                 <h2>
                     <?php if ($edit_dest_mode): ?>
-                        <i class="fas fa-edit"></i> Edit Destination Context: #<?php echo $edit_dest_id; ?>
+                        <i class="fas fa-edit"></i> Edit Destination City: #<?php echo $edit_dest_id; ?>
                     <?php else: ?>
                         <i class="fas fa-map-marked-alt"></i> Step 1: Destination Cities
                     <?php endif; ?>
@@ -476,7 +555,7 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                     <div class="alert <?php echo (strpos($dest_msg, '❌') !== false) ? 'alert-error' : ''; ?>"><?php echo $dest_msg; ?></div>
                 <?php endif; ?>
 
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" action="">
                     <input type="hidden" name="edit_id" value="<?php echo $edit_dest_id; ?>">
                     <input type="hidden" name="old_image" value="<?php echo htmlspecialchars($dest_to_edit['image_url']); ?>">
 
@@ -485,8 +564,8 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                         <input type="text" name="destination_name" placeholder="e.g., Aswan, Siwa" value="<?php echo htmlspecialchars($dest_to_edit['destination_name']); ?>" required>
                     </div>
                     <div class="input-group">
-                        <label>Location Cover Photo <?php echo $edit_dest_mode ? '<small style="color:#888;">(Leave blank to keep current)</small>' : ''; ?></label>
-                        <input type="file" name="destination_image" accept="image/*">
+                        <label>Location Cover Photo <?php echo $edit_dest_mode ? '<small style="color:#64748b; text-transform:none;">(Leave blank to keep current)</small>' : ''; ?></label>
+                        <input type="file" name="destination_image" accept="image/*" style="padding: 8px;">
                     </div>
 
                     <div class="btn-flex-container">
@@ -499,7 +578,7 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                     </div>
                 </form>
 
-                <h3>Current Saved Destinations</h3>
+                <h3 style="color: var(--primary-blue); font-size: 1.05rem; margin-top: 25px; font-weight: 700;">Current Saved Destinations</h3>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -514,7 +593,7 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                                 $is_hidden = ($d['is_active'] == 0);
                             ?>
                                 <tr class="<?php echo $is_hidden ? 'muted-row' : ''; ?>">
-                                    <td><img src="assets/img/<?php echo $d['image_url']; ?>" class="thumb-mini"></td>
+                                    <td><img src="../assets/img/<?php echo $d['image_url']; ?>" class="thumb-mini" alt="city"></td>
                                     <td>
                                         <strong><?php echo htmlspecialchars($d['destination_name']); ?></strong>
                                         <?php if ($is_hidden): ?> <span class="hidden-badge">Hidden</span> <?php endif; ?>
@@ -548,7 +627,7 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                     <div class="alert <?php echo (strpos($service_msg, '❌') !== false) ? 'alert-error' : ''; ?>"><?php echo $service_msg; ?></div>
                 <?php endif; ?>
 
-                <form method="POST">
+                <form method="POST" action="">
                     <input type="hidden" name="edit_id" value="<?php echo $edit_service_id; ?>">
 
                     <div class="input-group">
@@ -595,7 +674,7 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                     </div>
                 </form>
 
-                <h3>Active Builder Catalog Pool</h3>
+                <h3 style="color: var(--primary-blue); font-size: 1.05rem; margin-top: 25px; font-weight: 700;">Active Builder Catalog Pool</h3>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -611,13 +690,13 @@ $services_list = $conn->query("SELECT s.*, d.destination_name FROM services s JO
                                 $is_hidden = ($s['is_active'] == 0);
                             ?>
                                 <tr class="<?php echo $is_hidden ? 'muted-row' : ''; ?>">
-                                    <td><small style="color:#777; font-weight:600;"><?php echo htmlspecialchars($s['destination_name']); ?></small></td>
+                                    <td><small style="color:#64748b; font-weight:600;"><?php echo htmlspecialchars($s['destination_name']); ?></small></td>
                                     <td>
                                         <strong><?php echo htmlspecialchars($s['service_name']); ?></strong><br>
-                                        <small style="color:#999;"><?php echo $s['service_type']; ?></small>
+                                        <small style="color:var(--text-muted); text-transform:uppercase; font-size:10px; font-weight:700;"><?php echo $s['service_type']; ?></small>
                                         <?php if ($is_hidden): ?> <span class="hidden-badge">Hidden</span> <?php endif; ?>
                                     </td>
-                                    <td style="font-weight:bold; color:#1e5494;"><?php echo number_format($s['price']); ?> EGP</td>
+                                    <td style="font-weight:700; color:var(--primary-blue);"><?php echo number_format($s['price']); ?> EGP</td>
                                     <td>
                                         <a href="admin_build_package.php?edit_service=<?php echo $s['service_id']; ?>" class="action-link link-edit">Edit</a>
                                         <?php if ($is_hidden): ?>

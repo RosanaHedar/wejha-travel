@@ -220,7 +220,7 @@
 
 /* ── Why Choose Us v2 ───────────────────────── */
 .why2-section {
-  background: white;
+  background: #ECE7D1;
   padding: 5rem 2.5rem;
 }
 
@@ -232,7 +232,7 @@
 .why2-header h2 {
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   font-weight: 700;
-  color: var(--blue-dark);
+  color: #3B4233;
   margin-bottom: 0.5rem;
   font-family: Georgia, 'Times New Roman', serif;
 }
@@ -254,10 +254,12 @@
 .why2-card {
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-cream);
+  border: 1px solid #DBCEA5;
+  background: #DBCEA5;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  position: relative;
+  min-height: 320px;
 }
 
 .why2-card:hover {
@@ -267,66 +269,51 @@
 
 .why2-card img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
   display: block;
+  position: absolute;
+  inset: 0;
 }
 
 .why2-card-body {
-  padding: 1.2rem 1.2rem 1.5rem;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 45%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 1.4rem;
 }
 
 .why2-card-body h3 {
+  position: static;
+  color: white;
   font-size: 17px;
   font-weight: 700;
-  color: white;
   font-family: Georgia, 'Times New Roman', serif;
-  margin-bottom: 0.6rem;
-  line-height: 1.3;
-
-  /* overlay title on image — switch to overlay style */
-  margin-top: -3.5rem;
-  position: relative;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  padding: 0 0.2rem;
+  margin: 0 0 8px 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  padding: 0;
+  background: none;
+  width: 100%;
 }
 
 .why2-card-body p {
+  position: static;
+  color: rgba(255,255,255,0.88);
   font-size: 13px;
-  color: var(--text-mid);
-  line-height: 1.7;
-  margin-top: 0.8rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
+
 
 /* overlay style — title sits on image */
-.why2-card {
-  position: relative;
-}
 
-.why2-card-body {
-  position: relative;
-  background: var(--bg-cream);
-}
 
-.why2-card-body h3 {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  padding: 1rem 1.2rem 0.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  font-family: Georgia, 'Times New Roman', serif;
-  margin: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-}
-
-.why2-card-body p {
-  margin-top: 0;
-  padding-top: 0;
-}
 
 /* ── Hot Deals ──────────────────────────────── */
 .hotdeals-section {

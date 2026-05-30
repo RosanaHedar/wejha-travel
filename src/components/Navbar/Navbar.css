@@ -21,10 +21,11 @@
 
 /* ── Logo ─────────────────────────────────────── */
 .navbar-logo-img {
-  height: 60px;
+  height: 130px;        /* ← increase from 60px */
   width: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
+  overflow:visible
 }
 
 /* ── Nav Links ────────────────────────────────── */

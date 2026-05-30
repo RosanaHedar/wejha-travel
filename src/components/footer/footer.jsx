@@ -8,13 +8,9 @@ function Footer() {
       <div className="footer-top">
 
         {/* Brand */}
-        <div className="footer-brand">
-          <div className="footer-logo">
-            <span className="logo-we">WE</span>
-            <span className="logo-sha">جHA</span>
-            
-          </div>
-          <p className="footer-logo-arabic">وِجْهَة</p>
+       
+    <div className="footer-brand">
+  <img src="/images/logo2.png" alt="WEzHA Logo" className="footer-logo-img" />
           <p className="footer-desc">
             Discover the magic of Egypt with customized travel experiences that
             create unforgettable memories.

@@ -33,6 +33,14 @@
   margin-bottom: 14px;
 }
 
+.footer-logo-img {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  filter: brightness(0) invert(1);
+}
+
 .footer-desc {
   font-size: 0.875rem;
   line-height: 1.7;

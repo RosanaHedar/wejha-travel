@@ -10,6 +10,7 @@ import CustomPackage from './components/Pages/CustomPackage/CustomPackage';
 import Cart from './components/Pages/Cart/Cart';
 import Checkout from './components/Pages/Checkout/Checkout';
 import Contact from './components/Pages/Contact/Contact';
+import ProfilePage from './components/Pages/profile/Profilepage';
 
 <Route path="/custom-package" element={<CustomPackage />} />
 
@@ -24,6 +25,7 @@ function App() {
         {/* <Route path="/bundles" element={<Bundles />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<ProfilePage/>}/>
          <Route path="/bundles"       element={<Bundles />} />
   <Route path="/bundles/:id"   element={<PackageDetail />} />
   <Route path="/custom-package" element={<CustomPackage />} />

@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #f5f0eb; }
+
+.profile-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ── Hero Banner ── */
+.hero-banner {
+  background: linear-gradient(135deg, #1a3a6b 0%, #0f2347 50%, #1a3a6b 100%);
+  border-radius: 0 0 28px 28px;
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 30%;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(224, 123, 42, 0.08);
+}
+
+.hero-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 24px; font-weight: 600;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.hero-info { flex: 1; }
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+.hero-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 4px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(90deg, #e07b2a, #c8631a);
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+}
+.hero-stats {
+  display: flex;
+  gap: 28px;
+  margin-top: 12px;
+}
+.hero-stat { font-family: 'DM Sans', sans-serif; }
+.hero-stat-num { font-size: 20px; font-weight: 700; color: #fff; }
+.hero-stat-lbl {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.signout-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.signout-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* ── Rewards Card ── */
+.rewards-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 20px rgba(26, 58, 107, 0.07);
+}
+.rewards-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.rewards-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: #1a1a1a;
+  display: flex; align-items: center; gap: 10px;
+}
+.points-pill {
+  background: linear-gradient(90deg, #e07b2a, #c8631a);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #888;
+  margin-bottom: 8px;
+}
+.progress-track {
+  height: 10px;
+  background: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1a3a6b, #e07b2a);
+  border-radius: 6px;
+  transition: width 0.8s ease;
+}
+.rewards-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.rewards-stat {
+  text-align: center;
+  padding: 12px 0;
+  border-right: 1px solid #f0f0f0;
+}
+.rewards-stat:last-child { border-right: none; }
+.rewards-stat-icon { font-size: 26px; margin-bottom: 6px; }
+.rewards-stat-val {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: #1a1a1a;
+}
+.rewards-stat-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: #999;
+  margin-top: 2px;
+}
+
+/* ── Voucher Strip ── */
+.voucher-strip {
+  background: linear-gradient(90deg, #1a3a6b 0%, #0f2347 100%);
+  border-radius: 14px;
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 20px;
+}
+.voucher-info { font-family: 'DM Sans', sans-serif; }
+.voucher-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.voucher-val { font-size: 26px; font-weight: 700; color: #fff; margin: 2px 0; }
+.voucher-sub { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+.voucher-code {
+  background: rgba(224, 123, 42, 0.15);
+  border: 1.5px dashed rgba(224, 123, 42, 0.6);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+}
+.voucher-code-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.voucher-code-val {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: #e07b2a;
+  letter-spacing: 2px;
+}
+
+/* ── Tabs ── */
+.tab-row {
+  display: flex; gap: 4px;
+  margin-bottom: 24px;
+  background: #ede8e3;
+  border-radius: 14px;
+  padding: 4px;
+  width: fit-content;
+}
+.tab-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  padding: 9px 22px;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: #888;
+}
+.tab-btn.active {
+  background: #fff;
+  color: #1a3a6b;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Cards Grid ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.section-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; color: #999;
+  margin-bottom: 16px;
+}
+
+/* ── Journey / Wishlist Card ── */
+.journey-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(26, 58, 107, 0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.journey-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(26, 58, 107, 0.13);
+}
+.card-img-wrap { position: relative; }
+.card-img {
+  width: 100%; height: 170px;
+  object-fit: cover; display: block;
+  background: #e0d8cf;
+}
+.card-bookmark-badge {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 4px 6px;
+  display: flex; align-items: center;
+}
+.card-body { padding: 14px 16px 16px; }
+.card-type-tag {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 600;
+  color: #1a1a1a; line-height: 1.3;
+  margin-bottom: 6px;
+}
+.card-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: #888;
+  margin-bottom: 10px;
+}
+.card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.card-price {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: #1a3a6b;
+}
+
+/* ── Star Rating ── */
+.star-row { display: flex; gap: 2px; }
+
+/* ── Buttons ── */
+.card-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+.btn-outline {
+  flex: 1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid #1a3a6b;
+  background: transparent; color: #1a3a6b;
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: #1a3a6b; color: #fff; }
+
+.btn-solid {
+  flex: 1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(90deg, #e07b2a, #c8631a);
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.btn-solid:hover { opacity: 0.88; }
+
+.wish-action-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 12px;
+}
+.btn-remove {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1.5px solid #e74c3c;
+  background: transparent; color: #e74c3c;
+  transition: all 0.2s;
+}
+.btn-remove:hover { background: #e74c3c; color: #fff; }
+
+/* ── Empty State ── */
+.empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+.empty-state-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state-txt { font-family: 'DM Sans', sans-serif; font-size: 15px; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero-banner { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 20px; }
+  .hero-stats { gap: 16px; }
+  .voucher-strip { flex-direction: column; gap: 14px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .rewards-card { padding: 20px; }
+}

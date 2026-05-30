@@ -259,7 +259,83 @@
   padding: 0.5rem 0;
   border-bottom: 1px solid #f0ece8;
 }
+/* ── Add these to your existing Navbar.css ── */
 
+/* Inline avatar in the navbar icon button */
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a3a6b, #e07b2a);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+}
+
+/* Logged-in user header inside dropdown */
+.profile-dropdown-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 6px;
+}
+.profile-dropdown-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a3a6b, #e07b2a);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Divider line in dropdown */
+.profile-dropdown-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 6px 0;
+}
+
+/* Sign out button styled as a dropdown item */
+.profile-dropdown-signout {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: #c0392b;
+}
+.profile-dropdown-signout strong {
+  color: #c0392b;
+}
+.profile-dropdown-signout svg {
+  stroke: #c0392b;
+}
+.profile-dropdown-signout:hover {
+  background: #fff5f5;
+}
+
+/* Mobile-only profile nav link */
+.mobile-only {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-only {
+    display: list-item;
+  }
+}
 /* ── Responsive ───────────────────────────────── */
 @media (max-width: 768px) {
   .navbar-links { display: none; }
